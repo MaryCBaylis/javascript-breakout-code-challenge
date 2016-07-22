@@ -20,7 +20,7 @@ var data = (function(){
 	var paddleY = 700;
 	var paddleColor = colors.gray;
 	var paddleSpeed = 10;
-	// var maxPaddleVelocity = 10;
+	var ballDiameter = 10;
 
 	var images = {
 		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",
@@ -166,8 +166,8 @@ var data = (function(){
 		paddleWidth: paddleWidth,
 		paddleHeight: paddleHeight,
 		paddleColor: paddleColor,
-		// maxPaddleVelocity: maxPaddleVelocity,
 		paddleSpeed: paddleSpeed,
+		ballDiameter: ballDiameter,
 		images: images
 	}
 }());

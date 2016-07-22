@@ -10,6 +10,7 @@ var Game = (function(){
 	var blocks = [];
 	var bricks = [];
 	var paddle = new Paddle();
+	var ball = new Ball(paddle);
 	var gameIsActive = false;
 	var gameLoop;
 	var lastLoopTime = Date.now();
@@ -62,6 +63,9 @@ var Game = (function(){
 
 			//Add Paddle
 			paddle.draw(context);
+
+			//Add Ball
+			ball.draw(context);
 		},
 
 		start: function(){
