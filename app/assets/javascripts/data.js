@@ -1,9 +1,4 @@
 var data = (function(){
-	var canvasWidth = 1086;
-	var canvasHeight = 768;
-	var blockWidth = 60;
-	var blockHeight = 20;
-
 	var colors = {
 		"red": "255, 0, 0",
 		"orange": "255, 128, 0",
@@ -11,7 +6,25 @@ var data = (function(){
 		"green": "0, 200, 0",
 		"blue": "0, 0, 255",
 		"indigo": "127, 0, 255",
-		"purple": "153, 0, 153"
+		"purple": "153, 0, 153",
+		"gray": "200, 200, 200"
+	}
+
+	var canvasWidth = 1086;
+	var canvasHeight = 768;
+	var brickWidth = 60;
+	var brickHeight = 20;
+	var paddleWidth = 100;
+	var paddleHeight = 20;
+	var paddleX = (canvasWidth - paddleWidth)/2;
+	var paddleY = 700;
+	var paddleColor = colors.gray;
+	var paddleSpeed = 10;
+	// var maxPaddleVelocity = 10;
+
+	var images = {
+		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",
+		"background": "http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-6.jpg"
 	}
 
 
@@ -21,7 +34,7 @@ var data = (function(){
 	}
 
 	var gamePieces = {
-		"Blocks": [
+		"Bricks": [
 			//Red Row
 			{"x": grid.x[0], "y": grid.y[0], "color": colors.red},
 			{"x": grid.x[1], "y": grid.y[0], "color": colors.red},
@@ -135,7 +148,7 @@ var data = (function(){
 			{"x": grid.x[13], "y": grid.y[6], "color": colors.purple},
 			{"x": grid.x[14], "y": grid.y[6], "color": colors.purple},
 		],
-		"Bricks": [
+		"Blocks": [
 			{"x": 0, "y": 0, "width": 10, "height": canvasHeight},
 			{"x": canvasWidth-10, "y": 0, "width": 10, "height": canvasHeight},
 			{"x": 0, "y": 0, "width": canvasWidth, "height": 10},
@@ -146,7 +159,15 @@ var data = (function(){
 		gamePieces: gamePieces,
 		canvasWidth: canvasWidth,
 		canvasHeight: canvasHeight,
-		blockWidth: blockWidth,
-		blockHeight: blockHeight
+		brickWidth: brickWidth,
+		brickHeight: brickHeight,
+		paddleX: paddleX,
+		paddleY: paddleY,
+		paddleWidth: paddleWidth,
+		paddleHeight: paddleHeight,
+		paddleColor: paddleColor,
+		// maxPaddleVelocity: maxPaddleVelocity,
+		paddleSpeed: paddleSpeed,
+		images: images
 	}
 }());

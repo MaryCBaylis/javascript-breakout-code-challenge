@@ -14,8 +14,38 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require data
+//= require paddle
 //= require_tree .
 
 $(document).ready(function(){
-	game.setup();
+	Game.setup();
+
+	//Detect keypresses
+	$(document).keydown(function(e){
+		//If left arrow is pressed
+		if (e.which == 37){
+			Game.movePaddleLeft();
+		} 
+		//If right arrow is pressed
+		else if (e.which == 39) {
+			Game.movePaddleRight(); 
+		} 
+		//If spacebar is pressed
+		else if (e.which == 32) {
+			Game.start();
+		}
+	})
+
+	//Detect when arrow keys are no longer being pressed
+	$(document).keyup(function(e){
+		//If left arrow is no longer being pressed
+		if (e.which == 37){
+			Game.stopLeftPaddleMovement();
+		} 
+		//If right arrow is no longer being pressed
+		else if (e.which == 39){
+			Game.stopRightPaddleMovement();
+		}
+	})
+
 })
