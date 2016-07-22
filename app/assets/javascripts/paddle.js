@@ -10,9 +10,13 @@ var Paddle = function(){
 }
 
 Paddle.prototype = (function(){
+
 	return {
 		update: function(elapsedTime){
-			this.x += this.xVelocity * elapsedTime;
+			var newX = this.x + (this.xVelocity * elapsedTime);
+			if ((newX > 0) && (newX < data.canvasWidth - this.width)){
+				this.x = newX;
+			}
 		},
 
 		draw: function(context){
@@ -21,13 +25,7 @@ Paddle.prototype = (function(){
 		},
 
 		move: function(velocity){
-			// var newVelocity = this.xVelocity + velocity
-			// if (newVelocity <= this.maxVelocity && newVelocity >= -this.maxVelocity){
-			// 	this.xVelocity += velocity;
-			// }
 			this.xVelocity = velocity * this.speed;
-			// this.x += velocity * this.speed;
-			console.log(this.xVelocity);
 		},
 
 		stopLeftMovement: function(){
