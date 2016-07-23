@@ -3,25 +3,15 @@ var Block = function(blockParams){
 	this.y = blockParams.y;
 	this.width = blockParams.width;
 	this.height = blockParams.height;
-	this.imgLoaded = false
+	this.image = new Image();
+	this.image.src = data.images.block;
 }
 
 Block.prototype = (function(){
 	return {
 		draw: function(context){
-			var block = this;
-			var img = new Image()
-			img.src = data.images.block;
-			if (!block.imgLoaded){
-				img.onload = function(){
-					block.imgLoaded = true;
-					context.fillStyle = context.createPattern(img,"repeat");
-					context.fillRect(block.x, block.y, block.width, block.height);
-				}
-			} else {
-				context.fillStyle = context.createPattern(img,"repeat");
-				context.fillRect(block.x, block.y, block.width, block.height);
-			}
+			context.fillStyle = context.createPattern(this.image,"repeat");
+			context.fillRect(this.x, this.y, this.width, this.height);
 		}
 	}
 }());
