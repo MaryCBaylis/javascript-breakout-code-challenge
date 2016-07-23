@@ -28,10 +28,12 @@ var Game = (function(){
 
 		//Add bricks
 		for (var i = 0; i < bricks.length; i++){
-			if (ball.collidesWith(bricks[i])){
+			if (bricks[i].active && ball.collidesWith(bricks[i])){
 				ball.bounceFrom(bricks[i]);
+				bricks[i].fade();
 			}
 			//check for collision with ball. Inactivate brick and fade out if collision.
+			bricks[i].update(elapsedTime);
 			bricks[i].draw(context);
 		}
 

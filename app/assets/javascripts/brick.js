@@ -5,12 +5,15 @@ var Brick = function(brickParams){
 	this.height = data.brickHeight;
 	this.color = brickParams.color;
 	this.fadeLevel = 1;
+	this.active = true;
 }
 
 Brick.prototype = (function(){
 	return {
 		update: function(){
-
+			if (!this.active && this.fadeLevel > 0){
+				this.fadeLevel = this.fadeLevel - 0.1;
+			}
 		}, 
 
 		draw: function(context){
@@ -33,6 +36,10 @@ Brick.prototype = (function(){
 
 			context.fillStyle = shadow;
 			context.fillRect(this.x, this.y, this.width, this.height);
+		},
+
+		fade: function(){
+			this.active = false;
 		}
 	}
 }());
