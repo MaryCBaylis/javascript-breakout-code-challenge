@@ -53,7 +53,6 @@ Ball.prototype = (function(){
 
 		collidesWith: function(rectangleObject){
 			return (this.collidesWithOnXAxis(rectangleObject) && this.collidesWithOnYAxis(rectangleObject))
-			//Check if ball is colliding on x or y axis. Return true or false
 		},
 
 		bounceFrom: function(rectangleObject){

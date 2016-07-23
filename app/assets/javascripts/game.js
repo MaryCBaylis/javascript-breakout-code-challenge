@@ -20,7 +20,7 @@ var Game = (function(){
 		//Get time passed since last iteration for smoother animation
 		lastLoopTime = lastLoopTime || Date.now()
 		var currentTime = Date.now()
-		var elapsedTime = (currentTime - lastLoopTime)/30;
+		var elapsedTime = (currentTime - lastLoopTime)/3;
 		lastLoopTime = currentTime;
 
 		//Clear field
@@ -28,7 +28,7 @@ var Game = (function(){
 
 		//Add bricks
 		for (var i = 0; i < bricks.length; i++){
-			if (bricks[i].active && ball.collidesWith(bricks[i])){
+			if (bricks[i].active && !ball.isInCollision && ball.collidesWith(bricks[i])){
 				ball.bounceFrom(bricks[i]);
 				bricks[i].fade();
 			}
@@ -37,20 +37,20 @@ var Game = (function(){
 			bricks[i].draw(context);
 		}
 
-		//Add blocks
-		for (var i = 0; i < blocks.length; i++){
-			if(ball.collidesWith(blocks[i])){
-				ball.bounceFrom(blocks[i]);
-			}
-			blocks[i].draw(context);
-		}
-
 		//Update and add paddle
-		if (ball.collidesWith(paddle)){
+		if (!ball.isInCollision && ball.collidesWith(paddle)){
 			ball.bounceFrom(paddle);
 		}
 		paddle.update(elapsedTime);
 		paddle.draw(context);
+
+		//Add blocks
+		for (var i = 0; i < blocks.length; i++){
+			if(!ball.isInCollision && ball.collidesWith(blocks[i])){
+				ball.bounceFrom(blocks[i]);
+			}
+			blocks[i].draw(context);
+		}
 
 		//Update and add ball
 		ball.update(elapsedTime);

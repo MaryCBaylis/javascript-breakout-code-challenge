@@ -15,7 +15,11 @@ Paddle.prototype = (function(){
 	return {
 		update: function(elapsedTime){
 			var newX = this.x + (this.xVelocity * elapsedTime);
-			if ((newX > 0) && (newX < data.canvasWidth - this.width)){
+			if (newX < 0){
+				this.x = 0;
+			} else if (newX > data.canvasWidth - this.width){
+				this.x = data.canvasWidth - this.width;
+			} else {
 				this.x = newX;
 			}
 		},
