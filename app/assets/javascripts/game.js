@@ -13,34 +13,47 @@ var Game = (function(){
 	var ball = new Ball(paddle);
 	var gameIsActive = false;
 	var gameLoop;
-	var lastLoopTime = Date.now();
+	var lastLoopTime;
 
 	var loop = function(){
+
+		//Get time passed since last iteration for smoother animation
+		lastLoopTime = lastLoopTime || Date.now()
 		var currentTime = Date.now()
-		var elapsedTime = (currentTime - lastLoopTime)/100;
+		var elapsedTime = (currentTime - lastLoopTime)/30;
 		lastLoopTime = currentTime;
+
+		//Clear field
 		context.clearRect(0, 0, field.width, field.height);
+
+		//Add bricks
 		for (var i = 0; i < bricks.length; i++){
+			if (ball.collidesWith(bricks[i])){
+				ball.bounceFrom(bricks[i]);
+			}
+			//check for collision with ball. Inactivate brick and fade out if collision.
 			bricks[i].draw(context);
 		}
+
+		//Add blocks
 		for (var i = 0; i < blocks.length; i++){
+			if(ball.collidesWith(blocks[i])){
+				ball.bounceFrom(blocks[i]);
+			}
 			blocks[i].draw(context);
+		}
+
+		//Update and add paddle
+		if (ball.collidesWith(paddle)){
+			ball.bounceFrom(paddle);
 		}
 		paddle.update(elapsedTime);
 		paddle.draw(context);
-	}
 
-	var start = function(){
-		console.log("here i go!")
-		gameLoop = window.setInterval(loop, 20);
+		//Update and add ball
+		ball.update(elapsedTime);
+		ball.draw(context);
 	}
-
-	$(document).keypress(function(e){
-		//If spacebar is pressed when game is not active
-		if (e.which == 32 && !gameIsActive) {
-			gameIsActive = true;
-			start();		}
-	})
 
 	return {
 		setup: function(){
@@ -71,6 +84,7 @@ var Game = (function(){
 		start: function(){
 			gameIsActive = true;
 			gameLoop = window.setInterval(loop, 50);
+			ball.start();
 		},
 
 		movePaddleLeft: function(){

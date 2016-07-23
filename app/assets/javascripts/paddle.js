@@ -7,6 +7,7 @@ var Paddle = function(){
 	this.maxVelocity = data.maxPaddleVelocity;
 	this.color = data.paddleColor;
 	this.speed = data.paddleSpeed;
+	this.isPaddle = true ;
 }
 
 Paddle.prototype = (function(){
