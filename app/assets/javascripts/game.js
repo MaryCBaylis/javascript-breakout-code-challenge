@@ -28,7 +28,7 @@ var Game = (function(){
 
 		//Add bricks
 		for (var i = 0; i < bricks.length; i++){
-			if (bricks[i].active && !ball.isInCollision && ball.collidesWith(bricks[i])){
+			if (bricks[i].active && ball.collidesWith(bricks[i])){
 				ball.bounceFrom(bricks[i]);
 				bricks[i].fade();
 			}
@@ -38,7 +38,7 @@ var Game = (function(){
 		}
 
 		//Update and add paddle
-		if (!ball.isInCollision && ball.collidesWith(paddle)){
+		if (ball.collidesWith(paddle)){
 			ball.bounceFrom(paddle);
 		}
 		paddle.update(elapsedTime);
@@ -46,7 +46,7 @@ var Game = (function(){
 
 		//Add blocks
 		for (var i = 0; i < blocks.length; i++){
-			if(!ball.isInCollision && ball.collidesWith(blocks[i])){
+			if(ball.collidesWith(blocks[i])){
 				ball.bounceFrom(blocks[i]);
 			}
 			blocks[i].draw(context);

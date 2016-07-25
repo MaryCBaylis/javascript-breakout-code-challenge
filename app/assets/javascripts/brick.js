@@ -6,6 +6,10 @@ var Brick = function(brickParams){
 	this.color = brickParams.color;
 	this.fadeLevel = 1;
 	this.active = true;
+	this.top = new Line(x, y, x + this.width, y);
+	this.bottom = new Line(x, y + this.height, x + this.width, y + this.height);
+	this.left = new Line(x, y, x, y + this.height);
+	this.right(x + this.width, y, x + this.width, y + this.height);
 }
 
 Brick.prototype = (function(){

@@ -7,7 +7,11 @@ var Paddle = function(){
 	this.maxVelocity = data.maxPaddleVelocity;
 	this.color = data.paddleColor;
 	this.speed = data.paddleSpeed;
-	this.isPaddle = true ;
+	this.isPaddle = true;
+	this.top = new Line(x, y, x + this.width, y);
+	this.bottom = new Line(x, y + this.height, x + this.width, y + this.height);
+	this.left = new Line(x, y, x, y + this.height);
+	this.right(x + this.width, y, x + this.width, y + this.height);
 }
 
 Paddle.prototype = (function(){
