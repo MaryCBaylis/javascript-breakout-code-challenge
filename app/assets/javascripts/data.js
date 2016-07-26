@@ -21,7 +21,7 @@ var data = (function(){
 	var paddleColor = colors.gray;
 	var paddleSpeed = 10;
 	var ballRadius = 10;
-	var ballSpeed = 2;
+	var ballSpeed = 4;
 
 	var images = {
 		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",

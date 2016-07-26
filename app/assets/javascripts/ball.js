@@ -36,12 +36,11 @@ function Ball(paddle) {
 Ball.prototype = (function(){
 	return {
 		start: function(){
-			this.yVelocity = -this.speed;
 		},
 
 		update: function(elapsedTime){
-			this.x = this.x + (this.xVelocity * elapsedTime);
-			this.y = this.y + (this.yVelocity * elapsedTime);
+			this.x = this.x + (this.xVelocity * elapsedTime * this.speed);
+			this.y = this.y + (this.yVelocity * elapsedTime * this.speed);
 		},
 
 		draw: function(context){
@@ -66,8 +65,8 @@ Ball.prototype = (function(){
 		},
 
 		getUnitTime: function(elapsedTime){
-			var newX = this.x + (this.xVelocity * elapsedTime);
-			var newY = this.y + (this.yVelocity * elapsedTime);
+			var newX = this.x + (this.xVelocity * elapsedTime * this.speed);
+			var newY = this.y + (this.yVelocity * elapsedTime * this.speed);
 			var distance = Math.sqrt((this.x - newX) * (this.x - newX) + (this.y - newY) * (this.y - newY));
 			var ratio = (this.radius) / distance;
 			return elapsedTime * ratio/2;
