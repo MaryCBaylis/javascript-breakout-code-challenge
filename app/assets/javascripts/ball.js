@@ -2,9 +2,10 @@ function Ball(paddle) {
 	this.radius = data.ballRadius;
 	this.x = paddle.x + paddle.width/2;
 	this.y = paddle.y - this.radius;
-	this.xVelocity = 0;
+	this.xVelocity = 1;
 	this.yVelocity = -1;
 	this.speed = data.ballSpeed;
+	this.closestCollision = null;
 
 	this.collidesWithOnXAxis = function(rectangleObject){
 		return (this.radius + rectangleObject.width/2) > Math.abs(this.x - (rectangleObject.width/2 + rectangleObject.x));
@@ -52,7 +53,7 @@ Ball.prototype = (function(){
 		},
 
 		collidesWith: function(rectangleObject){
-			return (this.collidesWithOnXAxis(rectangleObject) && this.collidesWithOnYAxis(rectangleObject))
+			return (this.collidesWithOnXAxis(rectangleObject) && this.collidesWithOnYAxis(rectangleObject));
 		},
 
 		bounceFrom: function(rectangleObject){
@@ -62,6 +63,28 @@ Ball.prototype = (function(){
 			if (this.collidesFromLeft(rectangleObject) || this.collidesFromRight(rectangleObject)){
 				this.xVelocity = -this.xVelocity;
 			}
+		},
+
+		willCollideWith: function(rectangleObject, elapsedTime){
+			var course = new Line(this.x, this.y, this.x + (this.xVelocity * elapsedTime), this.y + (this.yVelocity * elapsedTime));
+			var intersectionTop = course.intersectsAt(rectangleObject.top);
+			// console.log(course)
+			if (intersectionTop){
+				return {
+					collidable: rectangleObject,
+					x: intersectionTop.x,
+					y: intersectionTop.y,
+					elapsedTime: elapsedTime * (intersectionTop.x / course.xDiff)
+				}
+			}
+		},
+
+		getUnitTime: function(elapsedTime){
+			var newX = this.x + (this.xVelocity * elapsedTime);
+			var newY = this.y + (this.yVelocity * elapsedTime);
+			var distance = Math.sqrt((this.x - newX) * (this.x - newX) + (this.y - newY) * (this.y - newY));
+			var ratio = (this.radius) / distance;
+			return elapsedTime * ratio/2;
 		}
 	}
 }());

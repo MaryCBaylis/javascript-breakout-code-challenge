@@ -16,13 +16,13 @@ Line.prototype = (function(){
 				return null;
 			}
 
-			var unitVector1 = numerator1 / denominator;
-			var unitVector2 = numerator2 / denominator;
+			var u1 = numerator1 / denominator;
+			var u2 = numerator2 / denominator;
 
-			if (unitVector1 >= 0 && unitVector1 <= 1 && unitVector2 >= 0 && unitVector2 <= 1) {
-				var result = {
-					x: this.x1 + (unitVector1 * (this.x2 - this.x1)),
-      		y: this.y1 + (unitVector2 * (this.y2 - this.y1))
+			if (u1 >= 0 && u1 <= 1 && u2 >= 0 && u2 <= 1) {
+				return {
+					x: this.x1 + (u1 * (this.x2 - this.x1)),
+      		y: this.y1 + (u2 * (this.y2 - this.y1))
 				}
 			}
 

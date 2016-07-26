@@ -5,10 +5,10 @@ var Block = function(blockParams){
 	this.height = blockParams.height;
 	this.image = new Image();
 	this.image.src = data.images.block;
-	this.top = new Line(x, y, x + this.width, y);
-	this.bottom = new Line(x, y + this.height, x + this.width, y + this.height);
-	this.left = new Line(x, y, x, y + this.height);
-	this.right(x + this.width, y, x + this.width, y + this.height);
+	this.top = new Line(this.x, this.y, this.x + this.width, this.y);
+	this.bottom = new Line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
+	this.left = new Line(this.x, this.y, this.x, this.y + this.height);
+	this.right = new Line(this.x + this.width, this.y, this.x + this.width, this.y + this.height);
 }
 
 Block.prototype = (function(){

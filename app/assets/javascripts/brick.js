@@ -5,17 +5,18 @@ var Brick = function(brickParams){
 	this.height = data.brickHeight;
 	this.color = brickParams.color;
 	this.fadeLevel = 1;
-	this.active = true;
-	this.top = new Line(x, y, x + this.width, y);
-	this.bottom = new Line(x, y + this.height, x + this.width, y + this.height);
-	this.left = new Line(x, y, x, y + this.height);
-	this.right(x + this.width, y, x + this.width, y + this.height);
+	this.isActive = true;
+	this.top = new Line(this.x, this.y, this.x + this.width, this.y);
+	this.bottom = new Line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
+	this.left = new Line(this.x, this.y, this.x, this.y + this.height);
+	this.right = new Line(this.x + this.width, this.y, this.x + this.width, this.y + this.height);
+	this.isABrick = true;
 }
 
 Brick.prototype = (function(){
 	return {
 		update: function(){
-			if (!this.active && this.fadeLevel > 0){
+			if (!this.isActive && this.fadeLevel > 0){
 				this.fadeLevel = this.fadeLevel - 0.1;
 			}
 		}, 
@@ -43,7 +44,7 @@ Brick.prototype = (function(){
 		},
 
 		fade: function(){
-			this.active = false;
+			this.isActive = false;
 		}
 	}
 }());
