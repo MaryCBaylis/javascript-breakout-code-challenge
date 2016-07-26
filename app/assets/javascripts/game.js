@@ -16,13 +16,6 @@ var Game = (function(){
 	var gameLoop;
 	var lastLoopTime;
 
-	// var sweepCollisions = function(totalDistance, unitDistance){
-	// 	var velocityRatio = unitDistance/totalDistance;
-	// 	for (var distanceTraveled = unitDistance; unitDistance <= totalDistance; distanceTraveled += unitDistance){
-
-	// 	}
-	// }
-
 	var sweepCollisions = function(elapsedTime, unitTime){
 		if (elapsedTime > 0){
 			for (var i = 0; i < collidables.length; i++){
@@ -70,60 +63,6 @@ var Game = (function(){
 			}
 			collidables[i].draw(context);
 		}
-
-
-		//Clear field
-		// context.clearRect(0, 0, field.width, field.height);
-
-		// var collisions = [];
-
-		// // ball.update(elapsedTime, collidables);
-		// for (var i = 0; i < collidables.length; i++){
-		// 	var rectangleObject = collidables[i];
-		// 	var collision = ball.willCollideWith(rectangleObject, elapsedTime);
-		// 	if (collision) {
-		// 		// console.log(collision);
-		// 		if (rectangleObject.isABrick){
-		// 			rectangleObject.fade();
-		// 			ball.x = collision.x;
-		// 			ball.y = collision.y;
-		// 			ball.draw(context);
-		// 		}
-		// 		// console.log(collision);
-		// 		collisions.push(collision);
-		// 	}
-		// }
-
-		// ball.update(elapsedTime);
-		//Add bricks
-		// for (var i = 0; i < bricks.length; i++){
-		// 	if (bricks[i].active && ball.collidesWith(bricks[i])){
-		// 		ball.bounceFrom(bricks[i]);
-		// 		bricks[i].fade();
-		// 	}
-		// 	//check for collision with ball. Inactivate brick and fade out if collision.
-		// 	bricks[i].update(elapsedTime);
-		// 	bricks[i].draw(context);
-		// }
-
-		// //Update and add paddle
-		// if (ball.collidesWith(paddle)){
-		// 	ball.bounceFrom(paddle);
-		// }
-		// paddle.update(elapsedTime);
-		// paddle.draw(context);
-
-		// //Add blocks
-		// for (var i = 0; i < blocks.length; i++){
-		// 	if(ball.collidesWith(blocks[i])){
-		// 		ball.bounceFrom(blocks[i]);
-		// 	}
-		// 	blocks[i].draw(context);
-		// }
-
-		//Update and add ball
-		// ball.update(elapsedTime);
-		// ball.draw(context);
 	}
 
 	return {

@@ -28,8 +28,5 @@ Line.prototype = (function(){
 
 			return null;
 		}
-
-
-
 	}
 }())

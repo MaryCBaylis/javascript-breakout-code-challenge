@@ -65,20 +65,6 @@ Ball.prototype = (function(){
 			}
 		},
 
-		willCollideWith: function(rectangleObject, elapsedTime){
-			var course = new Line(this.x, this.y, this.x + (this.xVelocity * elapsedTime), this.y + (this.yVelocity * elapsedTime));
-			var intersectionTop = course.intersectsAt(rectangleObject.top);
-			// console.log(course)
-			if (intersectionTop){
-				return {
-					collidable: rectangleObject,
-					x: intersectionTop.x,
-					y: intersectionTop.y,
-					elapsedTime: elapsedTime * (intersectionTop.x / course.xDiff)
-				}
-			}
-		},
-
 		getUnitTime: function(elapsedTime){
 			var newX = this.x + (this.xVelocity * elapsedTime);
 			var newY = this.y + (this.yVelocity * elapsedTime);
