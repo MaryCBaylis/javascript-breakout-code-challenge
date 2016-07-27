@@ -43,6 +43,10 @@ Paddle.prototype = (function(){
 
 		stopRightMovement: function(){
 			this.xVelocity = Math.min(this.xVelocity, 0)
+		},
+
+		getMidPoint: function(){
+			return this.x + this.width/2;
 		}
 	}
 }());

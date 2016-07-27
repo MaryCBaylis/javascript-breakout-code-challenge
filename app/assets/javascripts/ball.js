@@ -2,7 +2,7 @@ function Ball(paddle) {
 	this.radius = data.ballRadius;
 	this.x = paddle.x + paddle.width/2;
 	this.y = paddle.y - this.radius;
-	this.xVelocity = 1;
+	this.xVelocity = 0;
 	this.yVelocity = -1;
 	this.speed = data.ballSpeed;
 	this.closestCollision = null;
@@ -56,11 +56,18 @@ Ball.prototype = (function(){
 		},
 
 		bounceFrom: function(rectangleObject){
-			if (this.collidesFromBelow(rectangleObject) || this.collidesFromAbove(rectangleObject)){
-				this.yVelocity = -this.yVelocity;
+			if (rectangleObject.isPaddle){
+				console.log((this.x - rectangleObject.getMidPoint())/rectangleObject.width);
+				this.xVelocity = 2* (this.x - rectangleObject.getMidPoint())/rectangleObject.width;
+				this.yVelocity = - (1 - Math.abs((this.x - rectangleObject.getMidPoint())/rectangleObject.width));
 			}
-			if (this.collidesFromLeft(rectangleObject) || this.collidesFromRight(rectangleObject)){
-				this.xVelocity = -this.xVelocity;
+			else {
+				if (this.collidesFromBelow(rectangleObject) || this.collidesFromAbove(rectangleObject)){
+					this.yVelocity = -this.yVelocity;
+				}
+				if (this.collidesFromLeft(rectangleObject) || this.collidesFromRight(rectangleObject)){
+					this.xVelocity = -this.xVelocity;
+				}
 			}
 		},
 

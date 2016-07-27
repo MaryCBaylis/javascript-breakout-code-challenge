@@ -9,22 +9,13 @@ var Block = function(blockParams){
 	this.bottom = new Line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
 	this.left = new Line(this.x, this.y, this.x, this.y + this.height);
 	this.right = new Line(this.x + this.width, this.y, this.x + this.width, this.y + this.height);
-	this.context;
 }
 
 Block.prototype = (function(){
 	return {
-		setup: function(){
-			var field = document.createElement("canvas")
-			field.width = data.canvasWidth;
-			field.height = data.canvasHeight;
-			this.context = field.getContext('2d');
-			$("#game-container").append(field);
-		}, 
-
 		draw: function(context){
-			this.context.fillStyle = this.context.createPattern(this.image,"repeat");
-			this.context.fillRect(this.x, this.y, this.width, this.height);
+			context.fillStyle = context.createPattern(this.image,"repeat");
+			context.fillRect(this.x, this.y, this.width, this.height);
 		}
 	}
 }());
