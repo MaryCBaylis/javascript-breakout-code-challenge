@@ -15,6 +15,7 @@ var Game = (function(){
 	var gameIsActive = false;
 	var gameLoop;
 	var lastLoopTime;
+	var dialog = new Dialog();
 
 	var sweepCollisions = function(elapsedTime, unitTime){
 		if (elapsedTime > 0){
@@ -90,12 +91,21 @@ var Game = (function(){
 
 			//Add Ball
 			ball.draw(context);
+
+			// dialog.setup("Start");
+			dialog.draw(context, "Start");
 		},
 
 		start: function(){
-			gameIsActive = true;
-			gameLoop = window.setInterval(loop, 50);
-			ball.start();
+			if (gameIsActive){
+				gameIsActive = false;
+				window.clearInterval(gameLoop);
+				dialog.draw(context, "Paused");
+			} else {
+				gameIsActive = true;
+				lastLoopTime = null;
+				gameLoop = window.setInterval(loop, 50);
+			}
 		},
 
 		movePaddleLeft: function(){

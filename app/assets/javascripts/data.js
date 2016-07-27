@@ -156,6 +156,46 @@ var data = (function(){
 		]
 	}
 
+	var dialogs = {
+		"Start": {
+			"width": 800,
+			"height": 600,
+			"lines": [
+				{
+					"size": 40,
+					"font": "Arial",
+					"text": "Break All The Bricks!"
+				},
+				{
+					"size": 18,
+					"font": "Arial",
+					"text": "Use the LEFT and RIGHT arrows to move the paddle."
+				},
+				{
+					"size": 18,
+					"font": "Arial",
+					"text": "Press SPACE to begin."
+				}
+			]
+		},
+		"Paused": {
+			"width": 800,
+			"height": 600,
+			"lines": [
+				{
+					"size": 48,
+					"font": "Arial",
+					"text": "PAUSED"
+				},
+				{
+					"size": 18,
+					"font": "Arial",
+					"text": "Press SPACE to continue."
+				}
+			]
+		}
+	}
+
 	return {
 		gamePieces: gamePieces,
 		canvasWidth: canvasWidth,
@@ -170,6 +210,7 @@ var data = (function(){
 		paddleSpeed: paddleSpeed,
 		ballRadius: ballRadius,
 		ballSpeed: ballSpeed,
-		images: images
+		images: images,
+		dialogs: dialogs
 	}
 }());
