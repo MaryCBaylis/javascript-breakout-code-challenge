@@ -55,7 +55,6 @@ Dialog.prototype = (function(){
 	return {
 		draw: function(context, type, livesRemaining, score, time){
 			console.log("lives remianing", livesRemaining);
-			var params = this.dialogs[type];
 
 			// //Create background rectangle
 			context.fillStyle = "rgba(255, 255, 255, 0.75)";

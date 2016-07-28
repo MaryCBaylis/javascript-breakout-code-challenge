@@ -19,7 +19,7 @@
 //= require_tree .
 
 $(document).ready(function(){
-	Game.setup();
+	Game.create();
 
 	//Detect keypresses
 	$(document).keydown(function(e){
@@ -33,7 +33,7 @@ $(document).ready(function(){
 		} 
 		//If spacebar is pressed
 		else if (e.which == 32) {
-			Game.startOrPause();
+			Game.toggleGame();
 		}
 	})
 

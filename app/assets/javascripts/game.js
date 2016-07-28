@@ -15,9 +15,12 @@ var Game = (function(){
 	var gameLoop;
 	var lastLoopTime;
 	var dialog = new Dialog();
-	var livesLeft = 3;
+	var livesLeft;
+	var maxLives = 3;
+	var gameOver = true;
 
-	var setup = function(){
+	var setupGame = function(){
+		gameOver = false;
 		blocks = [];
 		bricks = [];
 		paddle = new Paddle();
@@ -50,8 +53,11 @@ var Game = (function(){
 		//Add Ball
 		ball.draw(context);
 
-		// dialog.setup("Start");
-		dialog.draw(context, "Start");
+	}
+
+	var setupPlayer = function(){
+		livesLeft = maxLives;
+		setupGame();
 	}
 
 	var start = function(){
@@ -85,53 +91,71 @@ var Game = (function(){
 		}
 	}
 
-	var loop = function(){
+	var gameShouldBeStopped = function(){
 		if (ball.isOutOfBounds()) {
 			livesLeft -= 1;
 			gameIsActive = false;
-			window.clearInterval(gameLoop);
 			if (livesLeft <= 0){
-				dialog.draw(context, "Lose", null, 100, 100)
+				gameOver = true;
+				dialog.draw(context, "Lose", null, 100, 100);
+				return true;
 			} else {
 				console.log("lives left", livesLeft);
 				dialog.draw(context, "Again", livesLeft);
 				resetNeeded = true;
+				return true;
 			}
-			return;
+			return false;
 		}
-		//Get time passed since last iteration for smoother animation
-		lastLoopTime = lastLoopTime || Date.now()
-		var currentTime = Date.now()
-		var elapsedTime = (currentTime - lastLoopTime)/16;
-		lastLoopTime = currentTime;
+	}
 
-		sweepCollisions(elapsedTime, ball.getUnitTime(elapsedTime));
+	var loop = function(){
+		if (gameShouldBeStopped()) {
+			window.clearInterval(gameLoop);
+			return;
+		} else {
+			//Get time passed since last iteration for smoother animation
+			lastLoopTime = lastLoopTime || Date.now()
+			var currentTime = Date.now()
+			var elapsedTime = (currentTime - lastLoopTime)/16;
+			lastLoopTime = currentTime;
 
-		//Clear field
-		context.clearRect(0, 0, field.width, field.height);
-		ball.draw(context);
-		paddle.update(elapsedTime);
+			sweepCollisions(elapsedTime, ball.getUnitTime(elapsedTime));
 
-		for (var i = 0; i < collidables.length; i++){
-			if (collidables[i].isABrick){
-				collidables[i].update();
+			//Clear field
+			context.clearRect(0, 0, field.width, field.height);
+			ball.draw(context);
+			paddle.update(elapsedTime);
+
+			for (var i = 0; i < collidables.length; i++){
+				if (collidables[i].isABrick){
+					collidables[i].update();
+				}
+				collidables[i].draw(context);
 			}
-			collidables[i].draw(context);
 		}
 	}
 
 	return {
-		setup: setup,
+		create: function(){
+			setupPlayer();
+			setupGame();
+			dialog.draw(context, "Start");
+		},
 
-		startOrPause: function(){
+		toggleGame: function(){
 			if (gameIsActive){
 				gameIsActive = false;
 				window.clearInterval(gameLoop);
 				dialog.draw(context, "Paused");
 			} else if (resetNeeded) {
 				resetNeeded = false;
-				setup();
-				start()
+				setupGame();
+				start();
+			} else if (gameOver){
+				setupPlayer();
+				setupGame();
+				start();
 			} else {
 				start();
 			}
