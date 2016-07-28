@@ -57,7 +57,6 @@ Ball.prototype = (function(){
 
 		bounceFrom: function(rectangleObject){
 			if (rectangleObject.isPaddle){
-				console.log((this.x - rectangleObject.getMidPoint())/rectangleObject.width);
 				this.xVelocity = 2* (this.x - rectangleObject.getMidPoint())/rectangleObject.width;
 				this.yVelocity = - (1 - Math.abs((this.x - rectangleObject.getMidPoint())/rectangleObject.width));
 			}
@@ -80,7 +79,6 @@ Ball.prototype = (function(){
 		},
 
 		isOutOfBounds: function(){
-			console.log(this.y)
 			return this.y >= data.canvasHeight;
 		}
 	}

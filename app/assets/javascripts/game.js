@@ -15,9 +15,10 @@ var Game = (function(){
 	var gameLoop;
 	var lastLoopTime;
 	var dialog = new Dialog();
-	var livesLeft;
 	var maxLives = 3;
+	var livesLeft = maxLives;
 	var gameOver = true;
+	var bricksRemaining = 0;
 
 	var setupGame = function(){
 		gameOver = false;
@@ -37,6 +38,7 @@ var Game = (function(){
 			var brick = new Brick(data.gamePieces.Bricks[i]);
 			collidables.push(brick);
 			brick.draw(context);
+			bricksRemaining += 1;
 		}
 
 		//Add Blocks - Unbreakable
@@ -56,8 +58,8 @@ var Game = (function(){
 	}
 
 	var setupPlayer = function(){
+		bricksRemaining = 0;
 		livesLeft = maxLives;
-		setupGame();
 	}
 
 	var start = function(){
@@ -75,6 +77,7 @@ var Game = (function(){
 					collidableObject.fade();
 					ball.update(unitTime);
 					sweepCollisions(elapsedTime - unitTime, unitTime);
+					bricksRemaining -= 1;
 					return
 				} 
 				else if (!collidableObject.isABrick && ball.collidesWith(collidableObject)){
@@ -92,7 +95,13 @@ var Game = (function(){
 	}
 
 	var gameShouldBeStopped = function(){
-		if (ball.isOutOfBounds()) {
+		if (bricksRemaining <= 0){
+			gameIsActive = false;
+			gameOver = true;
+			dialog.draw(context, "Win", null, 100, 200);
+			return true;
+		}
+		else if (ball.isOutOfBounds()) {
 			livesLeft -= 1;
 			gameIsActive = false;
 			if (livesLeft <= 0){
@@ -100,7 +109,6 @@ var Game = (function(){
 				dialog.draw(context, "Lose", null, 100, 100);
 				return true;
 			} else {
-				console.log("lives left", livesLeft);
 				dialog.draw(context, "Again", livesLeft);
 				resetNeeded = true;
 				return true;
@@ -113,7 +121,8 @@ var Game = (function(){
 		if (gameShouldBeStopped()) {
 			window.clearInterval(gameLoop);
 			return;
-		} else {
+		} 
+		else {
 			//Get time passed since last iteration for smoother animation
 			lastLoopTime = lastLoopTime || Date.now()
 			var currentTime = Date.now()

@@ -41,7 +41,7 @@ Dialog.prototype = (function(){
 		context.fillText("Press SPACE to give it another shot!", data.canvasWidth/2, 600);		
 	}
 
-	var gameOver = function(context, time, score){
+	var gameOverDialog = function(context, time, score){
 		context.font = "30px Arial";
 		context.fillText("You're out of lives! Bummer.", data.canvasWidth/2, 200);
 
@@ -49,21 +49,29 @@ Dialog.prototype = (function(){
 		context.fillText("Score: " + score, data.canvasWidth/2, 300);
 		context.fillText("Time: " + time, data.canvasWidth/2, 350);
 
-		context.fillText("Press SPACE to give it another shot!", data.canvasWidth/2, 450);
+		context.fillText("Press SPACE to start over!", data.canvasWidth/2, 450);
+	}
+
+	var winDialog = function(context, score, time){
+		context.font = "30px Arial";
+		context.fillText("Winner!", data.canvasWidth/2, 200);
+
+		context.font = "18px Arial";
+		context.fillText("Score: " + score, data.canvasWidth/2, 300);
+		context.fillText("Time: " + time, data.canvasWidth/2, 350);
+
+		context.fillText("Press SPACE to start over!", data.canvasWidth/2, 450);
 	}
 
 	return {
 		draw: function(context, type, livesRemaining, score, time){
-			console.log("lives remianing", livesRemaining);
 
-			// //Create background rectangle
+			//Create background rectangle
 			context.fillStyle = "rgba(255, 255, 255, 0.75)";
 			context.fillRect(this.x, this.y, this.width, this.height)
 
 			context.fillStyle = "rgba(0,0,0,1)";
 			context.textAlign = "center";
-			// startDialog(context);
-			console.log("type is ", type)
 			switch(type){
 				case "Start":
 					startDialog(context);
@@ -76,16 +84,12 @@ Dialog.prototype = (function(){
 					tryAgainDialog(context, livesRemaining);
 					break;
 				case "Lose":
-				gameOver(context, score, time);
+				gameOverDialog(context, score, time);
+					break;
+				case "Win":
+					winDialog(context, score, time);
 					break;
 			}
-			// for (var i = 0; i < params.lines.length; i++){
-			// 	console.log(params.lines[i])
-			// 	console.log()
-			// 	context.font = params.lines[i].size + "px " + params.lines[i].font;
-			// 	context.textAlign = "center";
-			// 	context.fillText(params.lines[i].text, data.canvasWidth/2, (this.y + params.lines[i].size) * i + 200);
-			// }
 		}
 	}
 }());
