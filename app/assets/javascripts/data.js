@@ -22,6 +22,8 @@ var data = (function(){
 	var paddleSpeed = 10;
 	var ballRadius = 10;
 	var ballSpeed = 4;
+	var dialogWidth = 800;
+	var dialogHeight = 600;
 
 	var images = {
 		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",
@@ -156,46 +158,6 @@ var data = (function(){
 		]
 	}
 
-	var dialogs = {
-		"Start": {
-			"width": 800,
-			"height": 600,
-			"lines": [
-				{
-					"size": 40,
-					"font": "Arial",
-					"text": "Break All The Bricks!"
-				},
-				{
-					"size": 18,
-					"font": "Arial",
-					"text": "Use the LEFT and RIGHT arrows to move the paddle."
-				},
-				{
-					"size": 18,
-					"font": "Arial",
-					"text": "Press SPACE to begin."
-				}
-			]
-		},
-		"Paused": {
-			"width": 800,
-			"height": 600,
-			"lines": [
-				{
-					"size": 48,
-					"font": "Arial",
-					"text": "PAUSED"
-				},
-				{
-					"size": 18,
-					"font": "Arial",
-					"text": "Press SPACE to continue."
-				}
-			]
-		}
-	}
-
 	return {
 		gamePieces: gamePieces,
 		canvasWidth: canvasWidth,
@@ -211,6 +173,7 @@ var data = (function(){
 		ballRadius: ballRadius,
 		ballSpeed: ballSpeed,
 		images: images,
-		dialogs: dialogs
+		dialogHeight: dialogHeight,
+		dialogWidth: dialogWidth
 	}
 }());

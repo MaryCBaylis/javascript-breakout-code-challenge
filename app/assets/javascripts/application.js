@@ -33,7 +33,7 @@ $(document).ready(function(){
 		} 
 		//If spacebar is pressed
 		else if (e.which == 32) {
-			Game.start();
+			Game.startOrPause();
 		}
 	})
 

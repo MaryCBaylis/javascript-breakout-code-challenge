@@ -77,6 +77,11 @@ Ball.prototype = (function(){
 			var distance = Math.sqrt((this.x - newX) * (this.x - newX) + (this.y - newY) * (this.y - newY));
 			var ratio = (this.radius) / distance;
 			return elapsedTime * ratio/2;
+		},
+
+		isOutOfBounds: function(){
+			console.log(this.y)
+			return this.y >= data.canvasHeight;
 		}
 	}
 }());
