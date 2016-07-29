@@ -1,4 +1,4 @@
-function Ball(paddle) {
+var Ball = function(paddle) {
 	this.radius = data.ballRadius;
 	this.x = paddle.x + paddle.width/2;
 	this.y = paddle.y - this.radius;

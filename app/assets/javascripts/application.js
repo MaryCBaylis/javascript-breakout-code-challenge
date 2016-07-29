@@ -18,7 +18,6 @@
 //= require score
 //= require player
 //= require timer
-//= require line
 //= require paddle
 //= require_tree .
 

@@ -6,10 +6,6 @@ var Brick = function(brickParams){
 	this.color = brickParams.color;
 	this.fadeLevel = 1;
 	this.isActive = true;
-	this.top = new Line(this.x, this.y, this.x + this.width, this.y);
-	this.bottom = new Line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
-	this.left = new Line(this.x, this.y, this.x, this.y + this.height);
-	this.right = new Line(this.x + this.width, this.y, this.x + this.width, this.y + this.height);
 	this.isABrick = true;
 	this.sound = data.sounds.brick;
 }
@@ -23,7 +19,6 @@ Brick.prototype = (function(){
 		}, 
 
 		draw: function(context){
-			console.log(this.sound)
 			//Draw color brick
 			context.fillStyle = "rgba(" + this.color + ", " + this.fadeLevel + ")";
 			context.fillRect(this.x, this.y, this.width, this.height)

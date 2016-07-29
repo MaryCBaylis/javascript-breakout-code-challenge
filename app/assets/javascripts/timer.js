@@ -40,7 +40,7 @@ Timer.prototype = (function(){
 			this.time += elapsedTime;
 		},
 
-		getFormattedTime(){
+		getFormattedTime: function(){
 			return formatTime(this.time);
 		}
 	}
