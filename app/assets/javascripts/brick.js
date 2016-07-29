@@ -45,7 +45,8 @@ Brick.prototype = (function(){
 		},
 
 		playSound: function(){
-			SoundHelper.play(this.sound)
+			var sound = new SoundHelper(this.sound)
+			sound.play();
 		}
 	}
 }());
