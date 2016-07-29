@@ -24,6 +24,12 @@ Paddle.prototype = (function(){
 			this.xVelocity = 0;
 		},
 
+		reset: function(){
+			this.x = data.paddleX;
+			this.y = data.paddleY;
+			this.xVelocity = 0;
+		},
+
 		update: function(elapsedTime){
 			var newX = this.x + (this.xVelocity * elapsedTime);
 			if (newX < 0){

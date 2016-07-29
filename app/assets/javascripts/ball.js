@@ -38,6 +38,13 @@ Ball.prototype = (function(){
 		start: function(){
 		},
 
+		reset: function(paddle){
+			this.x = paddle.x + paddle.width/2;
+			this.y = paddle.y - this.radius;
+			this.xVelocity = 0;
+			this.yVelocity = -1;
+		},
+
 		update: function(elapsedTime){
 			this.x = this.x + (this.xVelocity * elapsedTime * this.speed);
 			this.y = this.y + (this.yVelocity * elapsedTime * this.speed);

@@ -20,7 +20,13 @@
 //= require_tree .
 
 $(document).ready(function(){
-	Game.create();
+	var field = document.createElement("canvas")
+	field.width = data.canvasWidth;
+	field.height = data.canvasHeight;
+	$("#game-container").append(field);
+	var context = field.getContext('2d')
+	
+	Game.setup(context);
 
 	//Detect keypresses
 	$(document).keydown(function(e){
@@ -34,7 +40,7 @@ $(document).ready(function(){
 		} 
 		//If spacebar is pressed
 		else if (e.which == 32) {
-			Game.toggleGame();
+			Game.toggleGameState();
 		}
 	})
 

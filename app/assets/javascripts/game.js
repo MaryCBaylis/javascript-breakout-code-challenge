@@ -1,4 +1,4 @@
-var Game = (function(){
+var Game2 = (function(){
 
 	//Add the field
 	var field = document.createElement("canvas")

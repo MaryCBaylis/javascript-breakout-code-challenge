@@ -21,7 +21,7 @@ var data = (function(){
 	var paddleColor = colors.gray;
 	var paddleSpeed = 5;
 	var ballRadius = 10;
-	var ballSpeed = 4;
+	var ballSpeed = 5;
 	var dialogWidth = 800;
 	var dialogHeight = 600;
 
