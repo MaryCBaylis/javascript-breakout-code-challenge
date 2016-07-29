@@ -22,7 +22,7 @@ var Game = (function(){
 			return
 		}
 		if (ball.isOutOfBounds()){
-			player.loseLife();
+			// player.loseLife();
 			if (player.outOfLives()){
 				dialog.draw(context, "Lose", null, score.score, timer.getFormattedTime());
 				gameState = "GameOver"
@@ -124,6 +124,7 @@ var Game = (function(){
 	}
 
 	var reset = function(){
+		player.loseLife();
 		paddle.reset();
 		ball.reset(paddle);
 	}
@@ -147,6 +148,7 @@ var Game = (function(){
 		toggleGameState: function(){
 			switch (gameState){
 				case "Unstarted":
+					player.loseLife();
 				case "Paused":
 					start();
 					gameState = "Active";
