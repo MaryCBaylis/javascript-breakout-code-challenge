@@ -8,10 +8,7 @@ var Paddle = function(){
 	this.color = data.paddleColor;
 	this.speed = data.paddleSpeed;
 	this.isPaddle = true;
-	this.top = new Line(this.x, this.y, this.x + this.width, this.y);
-	this.bottom = new Line(this.x, this.y + this.height, this.x + this.width, this.y + this.height);
-	this.left = new Line(this.x, this.y, this.x, this.y + this.height);
-	this.right = new Line(this.x + this.width, this.y, this.x + this.width, this.y + this.height);
+	this.sound = data.sounds.block;
 }
 
 Paddle.prototype = (function(){
@@ -60,6 +57,10 @@ Paddle.prototype = (function(){
 
 		getMidPoint: function(){
 			return this.x + this.width/2;
+		},
+
+		playSound: function(){
+			SoundHelper.play(this.sound);
 		}
 	}
 }());

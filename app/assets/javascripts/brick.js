@@ -50,7 +50,7 @@ Brick.prototype = (function(){
 		},
 
 		playSound: function(){
-			SoundHelper.play("/assets/brick.mp3")
+			SoundHelper.play(this.sound)
 		}
 	}
 }());

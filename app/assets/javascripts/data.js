@@ -32,8 +32,8 @@ var data = (function(){
 	}
 
 	var sounds = {
-		"block": "../sounds/block.mp3",
-		"brick": "/app/assets/sounds/brick.mp3"
+		"block": "/assets/block.mp3",
+		"brick": "/assets/brick.mp3"
 	}
 
 

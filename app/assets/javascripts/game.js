@@ -74,6 +74,7 @@ var Game = (function(){
 					return;
 				} 
 				else if (!collidableObject.isABrick && ball.collidesWith(collidableObject)){
+					collidableObject.playSound();
 					ball.bounceFrom(collidableObject);
 					ball.update(unitTime);
 					sweepCollisions(elapsedTime - unitTime, unitTime);
