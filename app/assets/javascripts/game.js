@@ -22,7 +22,6 @@ var Game = (function(){
 			return
 		}
 		if (ball.isOutOfBounds()){
-			// player.loseLife();
 			if (player.outOfLives()){
 				dialog.draw(context, "Lose", null, score.score, timer.getFormattedTime());
 				gameState = "GameOver"
@@ -147,6 +146,8 @@ var Game = (function(){
 
 		toggleGameState: function(){
 			switch (gameState){
+				case "GameOver":
+					setup(context);
 				case "Unstarted":
 					player.loseLife();
 				case "Paused":
@@ -163,12 +164,6 @@ var Game = (function(){
 					start();
 					gameState = "Active";
 					break;
-				case "GameOver":
-					setup(context);
-					start();
-					gameState = "Active";
-					break;
-
 			}
 		},
 
