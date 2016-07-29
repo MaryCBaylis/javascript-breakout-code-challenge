@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require data
+//= require timer
 //= require line
 //= require paddle
 //= require_tree .

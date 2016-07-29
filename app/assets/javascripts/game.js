@@ -7,8 +7,8 @@ var Game = (function(){
 	var context = field.getContext('2d')
 
 	//Add the Actors
-	var paddle;
-	var collidables;
+	var paddle = new Paddle();
+	var collidables = [];
 	var ball;
 	var gameIsActive;
 	var resetNeeded;
@@ -19,19 +19,37 @@ var Game = (function(){
 	var livesLeft = maxLives;
 	var gameOver = true;
 	var bricksRemaining = 0;
+	var timer = new Timer();
+
+	var clearBoard = function(){
+		context.clearRect(0, 0, field.width, field.height);
+	}
+
+	var setupPlayer = function(){
+		gameOver = false;
+		bricksRemaining = 0;
+		livesLeft = maxLives;
+
+		paddle.setup();
+		paddle.draw(context);
+
+		//Add Ball
+		ball = new Ball(paddle);
+		ball.draw(context);
+	}
 
 	var setupGame = function(){
 		gameOver = false;
 		blocks = [];
 		bricks = [];
-		paddle = new Paddle();
-		collidables = [];
-		ball = new Ball(paddle);
+		// paddle = new Paddle();
+		// collidables = [];
+		// ball = new Ball(paddle);
 		gameIsActive = false;
 		resetNeeded = false;
 
 		$('#game-container').append(field)
-		context.clearRect(0, 0, field.width, field.height);
+		// context.clearRect(0, 0, field.width, field.height);
 
 		//Add Bricks - Breakable
 		for (var i = 0; i < data.gamePieces.Bricks.length; i++){
@@ -50,16 +68,8 @@ var Game = (function(){
 
 		//Add Paddle
 		collidables.push(paddle);
-		paddle.draw(context);
+		timer.draw(context);
 
-		//Add Ball
-		ball.draw(context);
-
-	}
-
-	var setupPlayer = function(){
-		bricksRemaining = 0;
-		livesLeft = maxLives;
 	}
 
 	var start = function(){
@@ -142,6 +152,9 @@ var Game = (function(){
 				}
 				collidables[i].draw(context);
 			}
+
+			timer.update(elapsedTime);
+			timer.draw(context);
 		}
 	}
 
@@ -159,13 +172,17 @@ var Game = (function(){
 				dialog.draw(context, "Paused");
 			} else if (resetNeeded) {
 				resetNeeded = false;
+				clearBoard();
+				setupPlayer();
 				setupGame();
 				start();
 			} else if (gameOver){
+				clearBoard();
 				setupPlayer();
 				setupGame();
 				start();
 			} else {
+				clearBoard();
 				start();
 			}
 		},
