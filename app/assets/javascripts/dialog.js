@@ -41,7 +41,7 @@ Dialog.prototype = (function(){
 		context.fillText("Press SPACE to give it another shot!", data.canvasWidth/2, 600);		
 	}
 
-	var gameOverDialog = function(context, time, score){
+	var gameOverDialog = function(context, score, time){
 		context.font = "30px Arial";
 		context.fillText("You're out of lives! Bummer.", data.canvasWidth/2, 200);
 

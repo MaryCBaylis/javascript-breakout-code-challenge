@@ -1,7 +1,7 @@
 var Timer = function(){
 	this.time = 0;
-	this.x = 0;
-	this.y = 0;
+	this.x = 20;
+	this.y = data.canvasHeight - 10;
 	this.width = 0;
 	this.height = 0;
 }
@@ -33,11 +33,15 @@ Timer.prototype = (function(){
 			context.fillStyle = "rgba(255, 255, 255, 0.75)";
 			context.textAlign = "left";
 			context.font = "18px Arial";
-			context.fillText("Time: " + formatTime(this.time), (this.x + this.width/2) + 20, data.canvasHeight - this.height - 10);
+			context.fillText("Time: " + formatTime(this.time), this.x, this.y);
 		},
 
 		update: function(elapsedTime){
 			this.time += elapsedTime;
+		},
+
+		getFormattedTime(){
+			return formatTime(this.time);
 		}
 	}
 }());
