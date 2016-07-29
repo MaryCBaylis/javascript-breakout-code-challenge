@@ -25,6 +25,9 @@ Timer.prototype = (function(){
 	}
 
 	return {
+		reset: function(){
+			this.time = 0;
+		},
 
 		draw: function(context){
 			context.fillStyle = "rgba(255, 255, 255, 0.75)";
