@@ -2,7 +2,8 @@
 	width: 1086px;
 	height: 768px;
 	margin: auto;
-	background-image: url("http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-6.jpg");
+	background-image: url("/assets/background.jpg");
+	background-color: black;
 }
 
 canvas {

@@ -1,9 +1,10 @@
-var Block = function(blockParams){
+var Block = function(blockParams, context){
 	this.x = blockParams.x;
 	this.y = blockParams.y;
 	this.width = blockParams.width;
 	this.height = blockParams.height;
 	this.image = new Image();
+	this.image.onload = this.draw(context);
 	this.image.src = data.images.block;
 	this.sound = data.sounds.block;
 }

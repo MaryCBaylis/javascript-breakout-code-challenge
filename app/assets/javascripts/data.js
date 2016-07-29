@@ -27,8 +27,8 @@ var data = (function(){
 	var numberOfLives = 3;
 
 	var images = {
-		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",
-		"background": "http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-6.jpg"
+		"block": "/assets/block.jpg",
+		"background": "/assets/background.jpg"
 	}
 
 	var sounds = {

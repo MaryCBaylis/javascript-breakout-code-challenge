@@ -104,7 +104,7 @@ var Game = (function(){
 		}
 
 		for (var i = 0; i < data.gamePieces.Blocks.length; i++){
-			var block = new Block(data.gamePieces.Blocks[i]);
+			var block = new Block(data.gamePieces.Blocks[i], context);
 			collidables.push(block);
 			block.draw(context);
 		}
