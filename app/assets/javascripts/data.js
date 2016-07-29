@@ -24,10 +24,16 @@ var data = (function(){
 	var ballSpeed = 4.5;
 	var dialogWidth = 800;
 	var dialogHeight = 600;
+	var numberOfLives = 3;
 
 	var images = {
 		"block": "http://img08.deviantart.net/c4e2/i/2010/135/e/f/seamless_metal_rust_02_texture_by_hhh316.jpg",
 		"background": "http://cdn.mysitemyway.com/etc-mysitemyway/webtreats/assets/posts/857/thumbs/tileable-classic-nebula-space-patterns-6.jpg"
+	}
+
+	var sounds = {
+		"block": "../sounds/block.mp3",
+		"brick": "/app/assets/sounds/brick.mp3"
 	}
 
 
@@ -173,7 +179,9 @@ var data = (function(){
 		ballRadius: ballRadius,
 		ballSpeed: ballSpeed,
 		images: images,
+		sounds: sounds,
 		dialogHeight: dialogHeight,
-		dialogWidth: dialogWidth
+		dialogWidth: dialogWidth,
+		numberOfLives: numberOfLives
 	}
 }());

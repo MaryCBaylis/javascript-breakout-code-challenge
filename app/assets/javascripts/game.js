@@ -8,7 +8,7 @@ var Game = (function(){
 	var context;
 	var lastLoopTime;
 	var dialog = new Dialog();
-	var livesRemaining = 2;
+	var player = new PlayerLives();
 	var score = new Score();
 	var bricksRemaining = 0;
 	var timer = new Timer();
@@ -22,14 +22,14 @@ var Game = (function(){
 			return
 		}
 		if (ball.isOutOfBounds()){
-			if (livesRemaining <= 0){
+			player.loseLife();
+			if (player.outOfLives()){
 				dialog.draw(context, "Lose", null, score.score, timer.getFormattedTime());
 				gameState = "GameOver"
 				stop();
 				return
 			}
-			dialog.draw(context, "Again", livesRemaining);
-			livesRemaining -= 1;
+			dialog.draw(context, "Again", player.livesRemaining);
 			gameState = "OutOfBounds";
 			stop();
 			return
@@ -56,6 +56,7 @@ var Game = (function(){
 		timer.update(elapsedTime);
 		timer.draw(context);
 		score.draw(context);
+		player.draw(context, ball);
 	}
 
 	var sweepCollisions = function(elapsedTime, unitTime){
@@ -65,6 +66,7 @@ var Game = (function(){
 				if (collidableObject.isABrick && collidableObject.isActive && ball.collidesWith(collidableObject)){
 					ball.bounceFrom(collidableObject);
 					collidableObject.fade();
+					collidableObject.playSound();
 					ball.update(unitTime);
 					bricksRemaining -= 1;
 					score.update(10);
@@ -87,7 +89,7 @@ var Game = (function(){
 	var setup = function(inContext){
 		context = inContext;
 
-		livesRemaining = 2;
+		player.reset();
 		collidables = [];
 		bricksRemaining = 0;
 		timer.reset();
@@ -113,6 +115,7 @@ var Game = (function(){
 		ball.draw(context);
 		timer.draw(context);
 		score.draw(context);
+		player.draw(context, ball);
 
 		if (gameState == "Unstarted"){
 			dialog.draw(context, "Start");

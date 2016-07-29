@@ -43,7 +43,7 @@ Dialog.prototype = (function(){
 
 	var gameOverDialog = function(context, score, time){
 		context.font = "30px Arial";
-		context.fillText("You're out of lives! Bummer.", data.canvasWidth/2, 200);
+		context.fillText("Game Over!", data.canvasWidth/2, 200);
 
 		context.font = "18px Arial";
 		context.fillText("Score: " + score, data.canvasWidth/2, 300);
