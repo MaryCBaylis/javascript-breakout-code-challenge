@@ -13,6 +13,27 @@ var Paddle = function(paddleParams){
 	this.speed = paddleParams.speed;
 	this.isPaddle = true;
 	this.sound = paddleParams.sound;
+
+	function roundedRectangle(context, x, y, w, h, color) {
+	  var mx = x + w / 2;
+	  var my = y + h / 2;
+	  context.beginPath(); 
+	  context.lineWidth="1";   
+	  context.moveTo(x,my);
+	  context.quadraticCurveTo(x, y, mx, y);
+	  context.quadraticCurveTo(x+w, y, x+w, my);
+	  context.quadraticCurveTo(x+w, y+h, mx, y+h);
+	  context.quadraticCurveTo(x, y+h, x, my);
+	  context.closePath();      
+	  
+	  context.stroke();
+	  context.fillStyle = "rgba(" + color + ", 1)";
+	  context.fill();
+	}
+
+	this.draw = function(context) {
+		roundedRectangle(context, this.x, this.y, this.width, this.height, this.color);
+	}
 }
 
 Paddle.prototype = (function(){
@@ -36,10 +57,7 @@ Paddle.prototype = (function(){
 			}
 		},
 
-		draw: function(context){
-			context.fillStyle = "rgba(" + this.color + ", 1)";
-			context.fillRect(this.x, this.y, this.width, this.height);
-		},
+		draw: this.draw,
 
 		move: function(velocity){
 			this.xVelocity = velocity * this.speed;
