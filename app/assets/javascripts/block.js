@@ -5,8 +5,8 @@ var Block = function(blockParams, context){
 	this.height = blockParams.height;
 	this.image = new Image();
 	this.image.onload = this.draw(context);
-	this.image.src = data.images.block;
-	this.sound = data.sounds.block;
+	this.image.src = blockParams.image
+	this.sound = blockParams.sound
 }
 
 Block.prototype = (function(){
@@ -17,8 +17,7 @@ Block.prototype = (function(){
 		},
 
 		playSound: function(){
-			var sound = new SoundHelper(this.sound);
-			sound.play();
+			this.sound.play();
 		}
 	}
 }());

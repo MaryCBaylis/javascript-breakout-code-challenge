@@ -1,8 +1,8 @@
 var Game = (function(){
 	var blocks = [];
 	var bricks = [];
-	var paddle = new Paddle();
-	var ball = new Ball(paddle);
+	var paddle;
+	var ball;
 	var collidables = [];
 	var gameState = "Unstarted";
 	var context;
@@ -12,6 +12,8 @@ var Game = (function(){
 	var score = new Score();
 	var bricksRemaining = 0;
 	var timer = new Timer();
+	var brickSound = new SoundHelper(data.sounds.brick);
+	var blockSound = new SoundHelper(data.sounds.block);
 
 	var gameLoop = function(){
 		//Check game state
@@ -87,6 +89,8 @@ var Game = (function(){
 	}
 
 	var setup = function(inContext){
+		paddle = new Paddle(getPaddleParams());
+		ball = new Ball(paddle);
 		context = inContext;
 
 		player.reset();
@@ -96,14 +100,16 @@ var Game = (function(){
 		score.reset();
 
 		for (var i = 0; i < data.gamePieces.Bricks.length; i++){
-			var brick = new Brick(data.gamePieces.Bricks[i]);
+			var brickParams = getBrickParams(i);
+			var brick = new Brick(getBrickParams(i));
 			collidables.push(brick);
 			brick.draw(context);
 			bricksRemaining += 1;
 		}
 
 		for (var i = 0; i < data.gamePieces.Blocks.length; i++){
-			var block = new Block(data.gamePieces.Blocks[i], context);
+			var blockParams = getBlockParams(i);
+			var block = new Block(blockParams, context);
 			collidables.push(block);
 			block.draw(context);
 		}
@@ -139,6 +145,30 @@ var Game = (function(){
 	var stop = function(){
 		window.clearInterval(loop);
 		lastLoopTime = null;
+	}
+
+	var getBrickParams = function(index) {
+		var brickParams = data.gamePieces.Bricks[index];
+		brickParams.width = data.brickWidth;
+		brickParams.height = data.brickHeight;
+		brickParams.sound = brickSound;
+
+		return brickParams
+	}
+
+	var getBlockParams = function(index) {
+		var blockParams = data.gamePieces.Blocks[index];
+		blockParams.image = data.images.block;;
+		blockParams.sound = blockSound;
+
+		return blockParams;
+	}
+
+	var getPaddleParams = function() {
+		var paddleParams = data.gamePieces.Paddle;
+		paddleParams.sound = blockSound;
+
+		return paddleParams;
 	}
 
 	return {

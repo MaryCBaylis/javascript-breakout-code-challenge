@@ -1,13 +1,13 @@
 var Brick = function(brickParams){
 	this.x = brickParams.x;
 	this.y = brickParams.y;
-	this.width = data.brickWidth;
-	this.height = data.brickHeight;
+	this.width = brickParams.width;
+	this.height = brickParams.height;
 	this.color = brickParams.color;
 	this.fadeLevel = 1;
 	this.isActive = true;
 	this.isABrick = true;
-	this.sound = data.sounds.brick;
+	this.sound = brickParams.sound;
 }
 
 Brick.prototype = (function(){
@@ -45,8 +45,7 @@ Brick.prototype = (function(){
 		},
 
 		playSound: function(){
-			var sound = new SoundHelper(this.sound)
-			sound.play();
+			this.sound.play();
 		}
 	}
 }());

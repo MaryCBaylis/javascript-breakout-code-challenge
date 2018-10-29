@@ -165,7 +165,17 @@ var data = (function(){
 			{"x": grid.x[11], "y": grid.y[3], "width": brickWidth, "height": brickHeight},
 			{"x": grid.x[5], "y": grid.y[1], "width": brickWidth * 5 + 20, "height": brickHeight},
 			// {"x": grid.x[6], "y": grid.y[5], "width": brickWidth * 3 + 10, "height": brickHeight},
-		]
+		],
+		"Paddle": {
+			"width": 100,
+			"height": 20,
+			"x": (canvasWidth-paddleWidth)/2,
+			"y": 700,
+			"color": colors.gray,
+			"speed": 5,	
+			"maxX": canvasWidth - paddleWidth,
+			"minX": 0
+		}
 	}
 
 	return {

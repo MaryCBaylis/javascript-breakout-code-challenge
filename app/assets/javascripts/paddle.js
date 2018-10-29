@@ -1,38 +1,36 @@
-var Paddle = function(){
-	this.x = data.paddleX;
-	this.y = data.paddleY;
-	this.width = data.paddleWidth;
-	this.height = data.paddleHeight;
+var Paddle = function(paddleParams){
+	this.startX = paddleParams.x;
+	this.startY = paddleParams.y;
+	this.x = this.startX;
+	this.y = this.startY;
+	this.width = paddleParams.width;
+	this.height = paddleParams.height;
 	this.xVelocity = 0;
 	this.maxVelocity = data.maxPaddleVelocity;
-	this.color = data.paddleColor;
-	this.speed = data.paddleSpeed;
+	this.maxX = paddleParams.maxX;
+	this.minX = paddleParams.minX;
+	this.color = paddleParams.color;
+	this.speed = paddleParams.speed;
 	this.isPaddle = true;
-	this.sound = data.sounds.block;
+	this.sound = paddleParams.sound;
 }
 
 Paddle.prototype = (function(){
 
 	return {
 
-		setup: function(){
-			this.x = data.paddleX;
-			this.y = data.paddleY;
-			this.xVelocity = 0;
-		},
-
 		reset: function(){
-			this.x = data.paddleX;
-			this.y = data.paddleY;
+			this.x = this.startX;
+			this.y = this.startY;
 			this.xVelocity = 0;
 		},
 
 		update: function(elapsedTime){
 			var newX = this.x + (this.xVelocity * elapsedTime);
-			if (newX < 0){
-				this.x = 0;
-			} else if (newX > data.canvasWidth - this.width){
-				this.x = data.canvasWidth - this.width;
+			if (newX < this.minX){
+				this.x = this.minX;
+			} else if (newX > this.maxX){
+				this.x = this.maxX;
 			} else {
 				this.x = newX;
 			}
@@ -60,8 +58,7 @@ Paddle.prototype = (function(){
 		},
 
 		playSound: function(){
-			var sound = new SoundHelper(this.sound);
-			sound.play();
+			this.sound.play();
 		}
 	}
 }());
