@@ -173,8 +173,8 @@ var data = (function(){
 			"y": 700,
 			"color": colors.gray,
 			"speed": 5,	
-			"maxX": canvasWidth - paddleWidth,
-			"minX": 0
+			"maxX": canvasWidth - paddleWidth - 10,
+			"minX": 10
 		}
 	}
 
