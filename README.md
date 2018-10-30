@@ -2,7 +2,7 @@
 
 JavaScript Developer test task
 
-Task
+# Original Task
 
 Game field is 1086x768 and consists of bricks (15x7) at the top part of the screen, each line should have
 
@@ -23,3 +23,24 @@ It the ball misses the bat, the ball goes out of the field in the bottom, and th
 After the last "life" is lost, the game is over and a window pops up. It contains "Game Over", information
 
 about the score and time, and "Restart" button to start again.
+
+# TODO:
+
+* Find an image for paddle - spaceship
+
+* Database
+	* Create Leaderboards
+
+* Add stages
+	* Bricks and blocks were designed to easily be added, removed, or moved by changing attributes in data.js.  Add functions in game.js to retrieve and iterate through different groups of blocks and bricks for stages. 
+	* Make some blocks that take more than one hit.
+	* Make blocks that move
+	* Make "blocks" (enemies that act like blocks when they're hit) that fire at spaceship.  Add movement.
+
+* Add powerups
+	* Multiball
+	* extra bumpers
+	* shield
+
+* Random generated stages?  Maybe?
+	* Increasing difficulty
